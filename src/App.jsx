@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './App.css';
 import { getRecipeData } from "./API.jsx"
 import { RecipeTable } from './components/RecipeTable.jsx';
-import { RecipeCard } from './components/RecipeCard.jsx';
 
 
 
@@ -39,15 +38,8 @@ export default function App() {
             <button type="submit">Find recipes!</button>
         </form>
         {isSubmitted && recipes.length > 0 && (
-          <RecipeCard props={recipes[0]} />
+          <RecipeTable props={recipes} />
         )}
-        {/* {recipes.length > 0 && (
-        <ul>
-          {recipes.map(recipe => (
-            <li key={recipe.id}>{recipe.title}</li>
-          ))}
-        </ul>
-        )} */}
     </div>
   );
 }

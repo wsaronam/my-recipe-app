@@ -57,3 +57,10 @@ code {
   border-radius: 3px;
   font-weight: bold;
 }
+
+.cards-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: auto;
+}
