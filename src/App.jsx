@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
-import { getRecipeData } from "./API.jsx"
+import { getAllRecipes, getRecipeData } from "./API.jsx"
 import { RecipeTable } from './components/RecipeTable.jsx';
 
 
@@ -17,7 +17,7 @@ export default function App() {
     const userInput = inputRef.current.value; // get the user input
 
     try {
-      getRecipeData(userInput).then(data => {
+      getAllRecipes(userInput).then(data => {
         setRecipes(data); // store the recipe data in recipes state
         setIsSubmitted(true);
         console.log(data);  // DELETE THIS LATER
