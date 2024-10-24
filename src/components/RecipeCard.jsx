@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 //import { useNavigate } from 'react-router-dom';
 import { getRecipeData } from '../API.jsx'
 
 export function RecipeCard(props) {
-    console.log(props);
-    //const navigate = useNavigate();
+    const [recipe, setRecipe] = useState();
 
-    const handleClick = () => {
-        var recipeInfo = getRecipeData(props.props.id);
-        //navigate(); // get to another page of the recipe and more of the recipe information
-    };
+    const handleClick = async (event) => {
+        event.preventDefault(); 
+    
+        try {
+            getRecipeData(props.props.id).then(data => {
+                setRecipe(data); // store the recipe data in recipes state
+                console.log(data);  // DELETE THIS LATER
+             });
+        }
+        catch (error) {
+          console.error("Error fetching recipes from Spoonacular:", error);
+          setRecipe();
+        }
+      };
+    
 
     return (
         <div className="card" onClick={handleClick} style={{cursor: 'pointer'}}>

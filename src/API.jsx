@@ -28,7 +28,7 @@ export async function getRecipeData(recipeID) {
   /*
     Gets more detailed information about the recipe selected using the recipe ID
   */
-  var getRecipeInfoString = `https://api.spoonacular.com/recipes/${recipeID}/information`
+  var getRecipeInfoString = `https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=${spoonacularKey}`
   try {
     const response = await fetch(getRecipeInfoString);
 
