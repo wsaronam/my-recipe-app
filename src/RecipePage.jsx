@@ -1,18 +1,11 @@
 import React, { useRef, useState } from 'react';
 
-export default function RecipePage() {
-  
+export default function RecipePage(props) {
     return (
       <div>
-        <h1>My Recipe App!</h1>
-          <form onSubmit={handleSubmit}>
-              Recipe Search<br />
-              <input id="userInput" ref={inputRef} type="text" /><br />
-              <button type="submit">Find recipes!</button>
-          </form>
-          {isSubmitted && recipes.length > 0 && (
-            <RecipeTable props={recipes} />
-          )}
+        <h1>{props.title}</h1>
+        <img src={props.image} alt="" />
+        <h2>{props.summary}</h2>
       </div>
     );
   }

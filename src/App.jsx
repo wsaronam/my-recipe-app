@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 import { getAllRecipes, getRecipeData } from "./API.jsx"
@@ -31,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <div>
+    <Router>
       <h1>My Recipe App!</h1>
         <form onSubmit={handleSubmit}>
             Recipe Search<br />
@@ -41,6 +41,10 @@ export default function App() {
         {isSubmitted && recipes.length > 0 && (
           <RecipeTable props={recipes} />
         )}
-    </div>
+
+        <Routes>
+
+        </Routes>
+    </Router>
   );
 }
