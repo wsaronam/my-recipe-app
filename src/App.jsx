@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 import { getAllRecipes, getRecipeData } from "./API.jsx"
 import { RecipeTable } from './components/RecipeTable.jsx';
+import { RecipePage } from './RecipePage.jsx';
 
 
 
@@ -21,7 +22,6 @@ export default function App() {
       getAllRecipes(userInput).then(data => {
         setRecipes(data); // store the recipe data in recipes state
         setIsSubmitted(true);
-        console.log(data);  // DELETE THIS LATER
       });
     }
     catch (error) {
@@ -31,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <Router>
+    <div>
       <h1>My Recipe App!</h1>
         <form onSubmit={handleSubmit}>
             Recipe Search<br />
@@ -43,8 +43,8 @@ export default function App() {
         )}
 
         <Routes>
-
+          <Route path="/recipe" element={<RecipePage />} />
         </Routes>
-    </Router>
+    </div>
   );
 }
