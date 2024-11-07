@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { getRecipeData } from '../API.jsx'
 
 export function RecipeCard(props) {
 
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/recipe'); // Navigate to the /recipe route
+        navigate('/recipe', {state: {recipeId: props.props.id}}); // Navigate to the /recipe route
     };
     
 
