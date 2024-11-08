@@ -4,16 +4,13 @@ import './App.css';
 import { RecipePage } from './components/RecipePage.jsx';
 import { HomePage } from './components/HomePage.jsx';
 
-
-
-
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/recipe" element={<RecipePage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/recipe" element={<RecipePage />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }

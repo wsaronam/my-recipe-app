@@ -6,9 +6,10 @@ export function RecipeCard(props) {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('/recipe', {state: {recipeId: props.props.id}}); // Navigate to the /recipe route
+        const url = `/recipe?recipeId=${props.props.id}`;
+        window.open(url, '_blank');
     };
-    
+
 
     return (
         <div className="card" onClick={handleClick} style={{cursor: 'pointer'}}>
