@@ -29,10 +29,10 @@ export function HomePage() {
     }
 
     return (
-        <div>
-            <h1>My Recipe App!</h1>
+        <div class="page-home">
+            <h1 id="title">My Recipe App!</h1>
             <form onSubmit={handleSubmit}>
-                Recipe Search<br />
+                <div id="search-title">Recipe Search</div><br />
                 <input id="userInput" ref={inputRef} type="text" /><br />
                 <button type="submit">Find recipes!</button>
                 <button onClick={handleClear}>Clear</button>
