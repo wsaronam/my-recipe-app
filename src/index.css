@@ -18,7 +18,28 @@ code {
 }
 
 #search-title {
-  font-size: 32px;
+  font-size: 24px;
+}
+
+#userInput {
+  font-size: 24px;
+  width: 800px;
+  font-family: 'Pacifico', cursive;
+
+  margin-bottom: 20px;
+}
+
+.btn-find {
+  font-size: 24px;
+  margin-right: 30px;
+
+  font-family: 'Pacifico', cursive;
+}
+
+.btn-clear {
+  font-size: 16px;
+
+  font-family: 'Pacifico', cursive;
 }
 
 .card {
@@ -45,6 +66,7 @@ code {
   margin-right: auto;
   border-radius: 15px;
   margin-bottom: 15px;
+  object-fit: contain;
 }
 
 .card-name {

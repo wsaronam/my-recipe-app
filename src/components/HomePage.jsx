@@ -29,13 +29,15 @@ export function HomePage() {
     }
 
     return (
-        <div class="page-home">
+        <div className="page-home">
             <h1 id="title">My Recipe App!</h1>
             <form onSubmit={handleSubmit}>
-                <div id="search-title">Recipe Search</div><br />
+                <div id="search-title">
+                    Simply type in the ingredients that you wish to cook with, press the [Find Recipes!] button, and select a yummy-sounding recipe!
+                </div><br />
                 <input id="userInput" ref={inputRef} type="text" /><br />
-                <button type="submit">Find recipes!</button>
-                <button onClick={handleClear}>Clear</button>
+                <button className="btn-find" type="submit">Find Recipes!</button>
+                <button className="btn-clear" onClick={handleClear}>Clear</button>
             </form>
             
             {isSubmitted && recipes.length > 0 && (
