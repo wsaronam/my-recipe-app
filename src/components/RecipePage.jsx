@@ -40,7 +40,7 @@ export function RecipePage() {
     }
 
     return (
-        <div>
+        <div className="page-recipe">
             <h1>{recipe.title}</h1>
             <img src={recipe.image} alt="" />
             <p dangerouslySetInnerHTML={{ __html: recipe.summary }} />

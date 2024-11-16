@@ -4,8 +4,7 @@ export async function getAllRecipes(userInput) {
     /*
     Grabs a list of recipes including the inputted ingredients
     */
-    //const getAllRecipesString = `/recipes/findByIngredients?ingredients=${userInput}&apiKey=${spoonacularKey}`;
-    var getAllRecipesString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${userInput}&apiKey=${spoonacularKey}`;
+    var getAllRecipesString = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${encodeURIComponent(userInput)}&apiKey=${spoonacularKey}`;
     try {
         const response = await fetch(getAllRecipesString);
 

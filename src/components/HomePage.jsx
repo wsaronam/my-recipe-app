@@ -35,6 +35,11 @@ export function HomePage() {
                 <div id="search-title">
                     Simply type in the ingredients that you wish to cook with, press the [Find Recipes!] button, and select a yummy-sounding recipe!
                 </div><br />
+                <div>
+                    If you have multiple ingredients that you wish to include, separate those ingredients with a comma "," <br />
+                    Ex: lettuce, tomatoes, onions, eggs <br /><br />
+                    The system will try to find recipes with as many ingredients from the list as possible. <br />
+                </div><br />
                 <input id="userInput" ref={inputRef} type="text" /><br />
                 <button className="btn-find" type="submit">Find Recipes!</button>
                 <button className="btn-clear" onClick={handleClear}>Clear</button>

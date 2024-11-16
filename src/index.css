@@ -95,3 +95,8 @@ code {
   gap: 20px;
   overflow-x: auto;
 }
+
+.page-recipe {
+  margin-left: 40px;
+  margin-right: 40%;
+}
