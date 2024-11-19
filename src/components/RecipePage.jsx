@@ -43,6 +43,12 @@ export function RecipePage() {
         <div className="page-recipe">
             <h1>{recipe.title}</h1>
             <img src={recipe.image} alt="" />
+            <ul>
+                {recipe.extendedIngredients.map(item => (
+                    <li>{item.original}</li>
+                ))}
+            </ul>
+            <p><b>Preparation time: {recipe.readyInMinutes} minutes</b></p><br />
             <p dangerouslySetInnerHTML={{ __html: recipe.summary }} />
             <p>{recipe.instructions}</p>
             <p>
