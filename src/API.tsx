@@ -1,6 +1,6 @@
 const spoonacularKey = "9cfb64406458440da2a209eb98759e78";
 
-export async function getAllRecipes(userInput): Promise<any> {
+export async function getAllRecipes(userInput: string): Promise<any> {
     /*
     Grabs a list of recipes including the inputted ingredients
     */
@@ -22,7 +22,7 @@ export async function getAllRecipes(userInput): Promise<any> {
     }
 }
 
-export async function getRecipeData(recipeID) {
+export async function getRecipeData(recipeID: string) {
     /*
     Gets more detailed information about the recipe selected using the recipe ID
     */

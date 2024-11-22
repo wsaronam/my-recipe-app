@@ -1,6 +1,6 @@
 import React from "react";
 
-export function RecipeCard(props): React.JSX.Element {
+export function RecipeCard(props: any): React.JSX.Element {
 
     const handleClick = () => {
         const url: string = `/recipe?recipeId=${props.props.id}`;

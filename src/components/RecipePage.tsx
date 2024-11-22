@@ -9,7 +9,7 @@ export function RecipePage(): React.JSX.Element {
     const queryParams: URLSearchParams = new URLSearchParams(location.search);  // Parse query parameters
     const recipeId: string | null = queryParams.get('recipeId');  // Get the recipeId parameter from the query string
 
-    const [recipe, setRecipe] = useState<JSON | any>(null);;
+    const [recipe, setRecipe] = useState<JSON | any>(null);
 
     // Fetch data when component mounts or recipeId changes
     useEffect(() => {
