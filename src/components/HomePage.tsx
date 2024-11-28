@@ -6,32 +6,7 @@ import { RecipeTable } from './RecipeTable.tsx';
 export function HomePage(): React.JSX.Element {
     const inputRef: any | React.MutableRefObject<null> = useRef(null);
     const [recipes, setRecipes] = useState<JSON[] | any>([]); // store JSON recipe data
-    const [favorites, setFavorites] = useState<string[]>([]);  // store user favorite recipes locally
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-
-    // Load favorites from localStorage
-    useEffect(() => {
-        const savedFavorites = localStorage.getItem("favorites");
-        const parsedFavorites: string[] = savedFavorites ? JSON.parse(savedFavorites) : [];
-        setFavorites(parsedFavorites);
-    }, []);
-
-    // Save favorites to localStorage on change
-    useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-    }, [favorites]);
-
-
-    // Connect these to buttons on recipes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    const addFavorite = (recipeID) => {
-        setFavorites((prev) => [...prev, recipeID]);
-    };
-
-    const removeFavorite = (recipeId) => {
-        setFavorites((prev) => prev.filter((id) => id !== recipeId));
-    };
-    // Connect these to buttons on recipes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 
     const handleSubmit = async (event) => {
@@ -51,11 +26,9 @@ export function HomePage(): React.JSX.Element {
     };
 
 
-
     function handleClear(): void {
       inputRef.current.value = "";
     }
-
 
 
     return (
