@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import '../App.css';
+import React, { useRef, useState } from 'react';
 import { getAllRecipes } from "../API.tsx";
 import { RecipeTable } from './RecipeTable.tsx';
 
