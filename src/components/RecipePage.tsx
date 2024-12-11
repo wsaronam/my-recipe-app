@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Location } from 'react-router-dom';
 import { getRecipeData } from '../API.tsx';
-import { useFavorites } from "../favoritesHook.ts"; // Adjust the path accordingly
+import { useFavorites } from "../hooks/favoritesHook.ts"; 
 
 export function RecipePage(): React.JSX.Element {
     const location: Location<any> = useLocation();
@@ -55,7 +55,7 @@ export function RecipePage(): React.JSX.Element {
             >
                 ★
             </button>
-            
+
             <h1>{recipe.title}</h1>
             <img src={recipe.image} alt="" />
             <ul>

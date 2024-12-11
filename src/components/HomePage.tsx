@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { getAllRecipes } from "../API.tsx";
 import { RecipeTable } from './RecipeTable.tsx';
+import { useFavorites } from "../hooks/favoritesHook.ts"; 
 
 export function HomePage(): React.JSX.Element {
     const inputRef: any | React.MutableRefObject<null> = useRef(null);
     const [recipes, setRecipes] = useState<JSON[] | any>([]); // store JSON recipe data
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+    const { favorites } = useFavorites();
 
 
     const handleSubmit = async (event) => {
@@ -50,6 +53,10 @@ export function HomePage(): React.JSX.Element {
             {isSubmitted && recipes.length > 0 && (
                 <RecipeTable props={recipes} />
             )}
+
+            {/* {favorites.length > 0 && (
+                <RecipeTable props={favorites} />
+            )} */}
         </div>
     );
 }
