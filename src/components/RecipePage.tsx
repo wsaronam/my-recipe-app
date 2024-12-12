@@ -48,9 +48,10 @@ export function RecipePage(): React.JSX.Element {
               className="favorite-button"
               onClick={() => toggleFavorite(recipeId)}
               style={{
-                color: isFavorite(recipeId) ? "gold" : "gray",
+                color: isFavorite(recipeId) ? "gold" : "dimgray",
                 fontSize: "80px",
-                marginLeft: "-20px"
+                marginLeft: "-20px",
+                border: "none"
               }}
             >
                 ★

@@ -21,8 +21,13 @@ export const useFavorites = () => {
     useEffect(() => {
         const handleFavoritesUpdate = () => {
             const updatedFavorites = localStorage.getItem("favorites");
+            console.log(favorites);
             const parsedFavorites = updatedFavorites ? JSON.parse(updatedFavorites) : [];
-            setFavorites(parsedFavorites);
+
+            // only update favorites if something changes
+            if (JSON.stringify(parsedFavorites) !== JSON.stringify(favorites)) {
+                setFavorites(parsedFavorites);
+            }
         };
 
         window.addEventListener("favoritesUpdated", handleFavoritesUpdate);
@@ -30,7 +35,7 @@ export const useFavorites = () => {
         return () => {
             window.removeEventListener("favoritesUpdated", handleFavoritesUpdate);
         };
-    }, []);
+    }, [favorites]);
     
 
     // Connect these to buttons on recipes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

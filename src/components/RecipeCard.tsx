@@ -14,27 +14,32 @@ export function RecipeCard(props: any): React.JSX.Element {
 
 
     return (
-        <div className="card" onClick={handleClick} style={{cursor: 'pointer'}}>
+        <div className="card" style={{cursor: 'pointer'}}>
             <button
                 className="favorite-button"
                 onClick={() => toggleFavorite(recipeID)}
                 style={{
-                  color: isFavorite(recipeID) ? "gold" : "gray"
+                    color: isFavorite(recipeID) ? "gold" : "dimgray",
+                    border: "solid",
+                    borderRadius: "22px",
                 }}
               >
               ★
             </button>
 
-            <p className="card-name">{props.props.title}</p>
-            <img className="card-img" src={props.props.image} alt="" />
-            <h3>Ingredients:</h3>
-            <ul>
-                {props.props.usedIngredients.map((ingredient) => (
-                <li key={ingredient.id}>
-                    {ingredient.original}
-                </li>
-                ))}
-            </ul>
+            <div onClick={handleClick}>
+                <p className="card-name">{props.props.title}</p>
+                <img className="card-img" src={props.props.image} alt="" />
+                <h3>Ingredients:</h3>
+                <ul>
+                    {props.props.usedIngredients.map((ingredient) => (
+                    <li key={ingredient.id}>
+                        {ingredient.original}
+                    </li>
+                    ))}
+                </ul>
+            </div>
+            
         </div>
     )
 }
