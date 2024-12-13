@@ -11,6 +11,7 @@ export function HomePage(): React.JSX.Element {
     const { favorites } = useFavorites();
 
 
+    // This section handles the search button
     const handleSubmit = async (event) => {
         event.preventDefault();
         const userInput: string = inputRef.current.value; // get the user input
@@ -54,7 +55,10 @@ export function HomePage(): React.JSX.Element {
                 <RecipeTable props={recipes} />
             )}
 
-            {/* {favorites.length > 0 && (
+            {/*  I think the problem here is that we're passing an array of recipe ID (strings) to the RecipeTable when it actually takes in the
+                 recipes itself.  We need to fix this.
+            */}
+            {/* {favorites && favorites.length > 0 && (
                 <RecipeTable props={favorites} />
             )} */}
         </div>
