@@ -2,7 +2,8 @@ import React from "react";
 import { useFavorites } from "../hooks/favoritesHook.ts"; 
 
 export function RecipeCard(props: any): React.JSX.Element {
-    const recipeID = props.props.id
+    const recipe = props.props
+    const recipeID = recipe.id
 
     const { isFavorite, toggleFavorite } = useFavorites();
 
@@ -17,9 +18,9 @@ export function RecipeCard(props: any): React.JSX.Element {
         <div className="card" style={{cursor: 'pointer'}}>
             <button
                 className="favorite-button"
-                onClick={() => toggleFavorite(recipeID)}
+                onClick={() => toggleFavorite(recipe)}
                 style={{
-                    color: isFavorite(recipeID) ? "gold" : "dimgray",
+                    color: isFavorite(recipe) ? "gold" : "dimgray",
                     border: "solid",
                     borderRadius: "22px",
                 }}
@@ -28,11 +29,11 @@ export function RecipeCard(props: any): React.JSX.Element {
             </button>
 
             <div onClick={handleClick}>
-                <p className="card-name">{props.props.title}</p>
-                <img className="card-img" src={props.props.image} alt="" />
+                <p className="card-name">{recipe.title}</p>
+                <img className="card-img" src={recipe.image} alt="" />
                 <h3>Ingredients:</h3>
                 <ul>
-                    {props.props.usedIngredients.map((ingredient) => (
+                    {recipe.usedIngredients.map((ingredient) => (
                     <li key={ingredient.id}>
                         {ingredient.original}
                     </li>

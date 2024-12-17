@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 
 
 export const useFavorites = () => {
-    const [favorites, setFavorites] = useState<string[]>([]);  // store user favorite recipes locally
+    const [favorites, setFavorites] = useState<any[]>([]);  // store user favorite recipes locally.  This will be an array of Recipe objects
 
     // Load favorites from localStorage
     useEffect(() => {
         const savedFavorites = localStorage.getItem("favorites");
-        const parsedFavorites: string[] = savedFavorites ? JSON.parse(savedFavorites) : [];
+        const parsedFavorites: any[] = savedFavorites ? JSON.parse(savedFavorites) : [];
         setFavorites(parsedFavorites);
     }, []);
 
@@ -21,7 +21,6 @@ export const useFavorites = () => {
     useEffect(() => {
         const handleFavoritesUpdate = () => {
             const updatedFavorites = localStorage.getItem("favorites");
-            console.log(favorites);
             const parsedFavorites = updatedFavorites ? JSON.parse(updatedFavorites) : [];
 
             // only update favorites if something changes
@@ -39,24 +38,28 @@ export const useFavorites = () => {
     
 
     // Connect these to buttons on recipes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    const addFavorite = (recipeID: string) => {
-        setFavorites((prev) => [...prev, recipeID]);
+    const addFavorite = (recipe: any) => {
+        setFavorites((prev) => [...prev, recipe]);
+        console.log("Added:", recipe);
+        console.log(favorites);
     };
 
-    const removeFavorite = (recipeID: string) => {
-        setFavorites((prev) => prev.filter((id) => id !== recipeID));
+    const removeFavorite = (recipe: any) => {
+        setFavorites((prev) => prev.filter((favRecipe) => favRecipe.id !== recipe.id));
+        console.log("Removed:", recipe);
+        console.log(favorites);
     };
 
-    const isFavorite = (recipeID: string) => {
-        return (favorites.includes(recipeID));
+    const isFavorite = (recipe: any) => {
+        return favorites.some((favRecipe) => favRecipe.id === recipe.id);
     }
 
-    const toggleFavorite = (recipeID: string) => {
-        if (favorites.includes(recipeID)) {
-          removeFavorite(recipeID); // Call remove function
+    const toggleFavorite = (recipe: any) => {
+        if (favorites.some((favRecipe) => favRecipe.id === recipe.id)) {
+          removeFavorite(recipe); // Call remove function
         } 
         else {
-          addFavorite(recipeID); // Call add function
+          addFavorite(recipe); // Call add function
         }
     };
     // Connect these to buttons on recipes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

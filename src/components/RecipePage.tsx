@@ -24,7 +24,6 @@ export function RecipePage(): React.JSX.Element {
         const fetchData = async () => {
             try {
                 const data: JSON | never[] = await getRecipeData(recipeId);
-                console.log(data);
                 setRecipe(data);  // store recipe data in state
             } 
             catch (error) {
@@ -46,9 +45,9 @@ export function RecipePage(): React.JSX.Element {
         <div className="page-recipe">
             <button
               className="favorite-button"
-              onClick={() => toggleFavorite(recipeId)}
+              onClick={() => toggleFavorite(recipe)}
               style={{
-                color: isFavorite(recipeId) ? "gold" : "dimgray",
+                color: isFavorite(recipe) ? "gold" : "dimgray",
                 fontSize: "80px",
                 marginLeft: "-20px",
                 border: "none"
