@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 
 export const useFavorites = () => {
     const [favorites, setFavorites] = useState<any[]>([]);  // store user favorite recipes locally.  This will be an array of Recipe objects
+    const favoritesChangedLocally = useRef(false);  // this will stop the dispatch/receive infinite loops
 
     // Load favorites from localStorage
     useEffect(() => {
@@ -13,13 +14,19 @@ export const useFavorites = () => {
 
     // Save favorites to localStorage on change
     useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-        window.dispatchEvent(new Event("favoritesUpdated")); // notifies favorites state change
+        if (favoritesChangedLocally.current) {
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            console.log("Dispatching favoritesUpdated event");
+            window.dispatchEvent(new Event("favoritesUpdated")); // notifies favorites state change
+            favoritesChangedLocally.current = false;
+        }
     }, [favorites]);
 
     // listen for favorites updates
     useEffect(() => {
+        console.log("setting up listerner");
         const handleFavoritesUpdate = () => {
+            console.log("Received favoritesUpdated event");
             const updatedFavorites = localStorage.getItem("favorites");
             const parsedFavorites = updatedFavorites ? JSON.parse(updatedFavorites) : [];
 
@@ -30,24 +37,27 @@ export const useFavorites = () => {
         };
 
         window.addEventListener("favoritesUpdated", handleFavoritesUpdate);
+        console.log("added listener");
 
         return () => {
+            console.log("removing listener");
             window.removeEventListener("favoritesUpdated", handleFavoritesUpdate);
+            console.log("removed listeneer")
         };
-    }, [favorites]);
+    }, []);
     
 
     // Connect these to buttons on recipes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     const addFavorite = (recipe: any) => {
+        favoritesChangedLocally.current = true;
         setFavorites((prev) => [...prev, recipe]);
         console.log("Added:", recipe);
-        console.log(favorites);
     };
 
     const removeFavorite = (recipe: any) => {
+        favoritesChangedLocally.current = true;
         setFavorites((prev) => prev.filter((favRecipe) => favRecipe.id !== recipe.id));
         console.log("Removed:", recipe);
-        console.log(favorites);
     };
 
     const isFavorite = (recipe: any) => {
@@ -55,11 +65,11 @@ export const useFavorites = () => {
     }
 
     const toggleFavorite = (recipe: any) => {
-        if (favorites.some((favRecipe) => favRecipe.id === recipe.id)) {
-          removeFavorite(recipe); // Call remove function
+        if (isFavorite(recipe)) {
+          removeFavorite(recipe); 
         } 
         else {
-          addFavorite(recipe); // Call add function
+          addFavorite(recipe);
         }
     };
     // Connect these to buttons on recipes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
