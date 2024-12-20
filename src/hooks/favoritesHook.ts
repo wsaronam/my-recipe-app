@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
 
+let isListenerSetup = false;  // check if listener is already setup to avoid multiple listener issue
+
 export const useFavorites = () => {
+    console.log("useFavorites called");
     const [favorites, setFavorites] = useState<any[]>([]);  // store user favorite recipes locally.  This will be an array of Recipe objects
     const favoritesChangedLocally = useRef(false);  // this will stop the dispatch/receive infinite loops
 
@@ -24,26 +27,30 @@ export const useFavorites = () => {
 
     // listen for favorites updates
     useEffect(() => {
-        console.log("setting up listerner");
-        const handleFavoritesUpdate = () => {
-            console.log("Received favoritesUpdated event");
-            const updatedFavorites = localStorage.getItem("favorites");
-            const parsedFavorites = updatedFavorites ? JSON.parse(updatedFavorites) : [];
+        if (!isListenerSetup) {
+            isListenerSetup = true;
+            console.log("setting up listener for favoritesUpdated event");
+            
+            const handleFavoritesUpdate = () => {
+                console.log("Received favoritesUpdated event");
+                const updatedFavorites = localStorage.getItem("favorites");
+                const parsedFavorites = updatedFavorites ? JSON.parse(updatedFavorites) : [];
 
-            // only update favorites if something changes
-            if (JSON.stringify(parsedFavorites) !== JSON.stringify(favorites)) {
-                setFavorites(parsedFavorites);
-            }
-        };
+                // only update favorites if something changes
+                if (JSON.stringify(parsedFavorites) !== JSON.stringify(favorites)) {
+                    setFavorites(parsedFavorites);
+                }
+            };
 
-        window.addEventListener("favoritesUpdated", handleFavoritesUpdate);
-        console.log("added listener");
+            window.addEventListener("favoritesUpdated", handleFavoritesUpdate);
+            console.log("added listener");
 
-        return () => {
-            console.log("removing listener");
-            window.removeEventListener("favoritesUpdated", handleFavoritesUpdate);
-            console.log("removed listeneer")
-        };
+            return () => {
+                console.log("removing listener");
+                window.removeEventListener("favoritesUpdated", handleFavoritesUpdate);
+                console.log("removed listeneer")
+            };
+        }
     }, []);
     
 
