@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { getAllRecipes } from "../API.tsx";
 import { RecipeTable } from './RecipeTable.tsx';
-import { useFavorites } from "../hooks/favoritesHook.ts"; 
+import { useFavorites } from "../context/favoritesContext.tsx"; 
 
 export function HomePage(): React.JSX.Element {
     const inputRef: any | React.MutableRefObject<null> = useRef(null);

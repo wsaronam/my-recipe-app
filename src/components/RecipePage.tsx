@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Location } from 'react-router-dom';
 import { getRecipeData } from '../API.tsx';
-import { useFavorites } from "../hooks/favoritesHook.ts"; 
+import { useFavorites } from "../context/favoritesContext.tsx"; 
 
 export function RecipePage(): React.JSX.Element {
     const location: Location<any> = useLocation();

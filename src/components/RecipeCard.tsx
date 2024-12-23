@@ -1,5 +1,5 @@
 import React from "react";
-import { useFavorites } from "../hooks/favoritesHook.ts"; 
+import { useFavorites } from "../context/favoritesContext.tsx"; 
 
 export function RecipeCard(props: any): React.JSX.Element {
     const recipe = props.props
