@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { getAllRecipes } from "../API.tsx";
 import { RecipeTable } from './RecipeTable.tsx';
 import { useFavorites } from "../context/favoritesContext.tsx"; 
@@ -9,6 +9,11 @@ export function HomePage(): React.JSX.Element {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     const { favorites } = useFavorites();
+
+    // temp for debugging favorites
+    useEffect(() => {
+        console.log("this component's favorites:", favorites);
+    }, [favorites]);
 
 
     // This section handles the search button

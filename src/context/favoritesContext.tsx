@@ -120,14 +120,10 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     // functions for adding/removing/checking favorites ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     const addFavorite = (recipe: any) => {
         setFavorites((prev) => [...prev, recipe]);
-        console.log("added favorite: " + recipe);
-        console.log("favorites: " + favorites);
     };
 
     const removeFavorite = (recipe: any) => {
         setFavorites((prev) => prev.filter((favRecipe) => favRecipe.id !== recipe.id));
-        console.log("removed favorite: " + recipe);
-        console.log("favorites: " + favorites);
     };
 
     const isFavorite = (recipe: any) => {
@@ -135,6 +131,7 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
 
     const toggleFavorite = (recipe: any) => {
+        console.log("toggle favorite: " + recipe)
         if (isFavorite(recipe)) {
             removeFavorite(recipe);
         }
@@ -142,6 +139,8 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         else {
             addFavorite(recipe);
         }
+
+        console.log("new favorites after toggle: " + favorites);
     };
 
 
