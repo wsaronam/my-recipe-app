@@ -12,7 +12,7 @@ export function HomePage(): React.JSX.Element {
 
     // temp for debugging favorites
     useEffect(() => {
-        console.log("this component's favorites:", favorites);
+        console.log("HomePage favorites:", favorites);
     }, [favorites]);
 
 

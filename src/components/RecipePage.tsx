@@ -17,7 +17,7 @@ export function RecipePage(): React.JSX.Element {
 
     // temp for debugging favorites
         useEffect(() => {
-            console.log("this component's favorites:", favorites);
+            console.log("RecipePage favorites:", favorites);
         }, [favorites]);
 
     // Fetch data when component mounts or recipeId changes

@@ -100,14 +100,17 @@ import { createContext, useContext, useState, useEffect, ReactNode, FC } from "r
 const FavoritesContext = createContext<any | null>(null);
 
 export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ children }): JSX.Element => {
-    const [favorites, setFavorites] = useState<any[]>([]);
+    const [favorites, setFavorites] = useState<any[]>(() => {  // load on startup initial
+        const storedFavorites = localStorage.getItem("favorites");
+        return storedFavorites ? JSON.parse(storedFavorites): [];
+    });
 
-    // load favorites on startup
-    useEffect(() => {
-        const savedFavorites = localStorage.getItem("favorites");
-        const parsedFavorites: any[] = savedFavorites ? JSON.parse(savedFavorites) : [];
-        setFavorites(parsedFavorites);
-    }, []);
+    // // load favorites on startup  is this required?
+    // useEffect(() => {
+    //     const savedFavorites = localStorage.getItem("favorites");
+    //     const parsedFavorites: any[] = savedFavorites ? JSON.parse(savedFavorites) : [];
+    //     setFavorites(parsedFavorites);
+    // }, []);
 
     // save favorites to localStorage when favorites changes
     useEffect(() => {
