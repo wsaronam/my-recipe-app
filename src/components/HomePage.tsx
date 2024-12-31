@@ -63,7 +63,7 @@ export function HomePage(): React.JSX.Element {
             {/*  I think the problem here is that we're passing an array of recipe ID (strings) to the RecipeTable when it actually takes in the
                  recipes itself.  We need to fix this.
             */}
-            {/* {favorites && favorites.length > 0 && (
+            {/* {favorites?.length > 0 && (
                 <RecipeTable props={favorites} />
             )} */}
         </div>
