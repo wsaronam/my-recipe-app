@@ -43,3 +43,16 @@ export async function getRecipeData(recipeID: string) {
         return [];  // return empty array again if there is error
     }
 }
+
+export async function getRecipeDataList(recipeIDArr: string[]) {
+    /*
+    Takes a list of recipe IDs and and returns a list of all the recipes
+    CURRENTLY USES TOO MANY API CALLS.  NEED TO REDUCE THIS.
+    */
+    const recipeListArr: JSON[] | any = []
+    // for (var i = 0; i < recipeIDArr.length; i++) {
+    //     recipeListArr.push(await getRecipeData(recipeIDArr[i]));
+    // }
+
+    return recipeListArr
+}

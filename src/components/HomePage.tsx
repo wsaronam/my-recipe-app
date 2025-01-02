@@ -1,18 +1,40 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { getAllRecipes } from "../API.tsx";
+import { getAllRecipes, getRecipeDataList } from "../API.tsx";
 import { RecipeTable } from './RecipeTable.tsx';
 import { useFavorites } from "../context/favoritesContext.tsx"; 
 
 export function HomePage(): React.JSX.Element {
     const inputRef: any | React.MutableRefObject<null> = useRef(null);
     const [recipes, setRecipes] = useState<JSON[] | any>([]); // store JSON recipe data
+    const [favRecipes, setFavRecipes] = useState<JSON[] | any>([]); // store JSON favorite recipe data
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     const { favorites } = useFavorites();
 
     // temp for debugging favorites
+    // NEED TO FIGURE OUT A WAY OF GETTING THE CORRECT RECIPE INFORMATION AND BUILDING OBJECT TO PASS TO RECIPETABLE
     useEffect(() => {
         console.log("HomePage favorites:", favorites);
+        // // get arr of recipe IDs from the favorites
+        // const tempFavList: any[] = []
+        // for (var i = 0; i < favorites.length; i++) {
+        //     tempFavList.push(favorites[i].id);
+        // }
+        // console.log("recipeID list", tempFavList);
+
+        // // get and store the fav recipe data
+        // const tempFavRecipesList: JSON[] | any = [];
+        // try {
+        //     getRecipeDataList(tempFavList).then(data => {
+        //         setFavRecipes(data); // store the fav recipe data in favRecipes state
+        //     });
+        // }
+        // catch (error) {
+        //     console.error("Error fetching recipes from Spoonacular:", error);
+        //     setFavRecipes([]);
+        // }
+        // console.log("fav recipes list:", favRecipes)
+
     }, [favorites]);
 
 
@@ -63,8 +85,8 @@ export function HomePage(): React.JSX.Element {
             {/*  I think the problem here is that we're passing an array of recipe ID (strings) to the RecipeTable when it actually takes in the
                  recipes itself.  We need to fix this.
             */}
-            {/* {favorites?.length > 0 && (
-                <RecipeTable props={favorites} />
+            {/* {favRecipes?.length > 0 && (
+                <RecipeTable props={favRecipes} />
             )} */}
         </div>
     );
