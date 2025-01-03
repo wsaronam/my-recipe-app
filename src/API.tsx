@@ -49,10 +49,21 @@ export async function getRecipeDataList(recipeIDArr: string[]) {
     Takes a list of recipe IDs and and returns a list of all the recipes
     CURRENTLY USES TOO MANY API CALLS.  NEED TO REDUCE THIS.
     */
-    const recipeListArr: JSON[] | any = []
-    // for (var i = 0; i < recipeIDArr.length; i++) {
-    //     recipeListArr.push(await getRecipeData(recipeIDArr[i]));
-    // }
+    const idString = recipeIDArr.join(',');
+    var getRecipeInfoString: string = `https://api.spoonacular.com/recipes/informationBulk?ids=${idString}&apiKey=${spoonacularKey}`
+    try {
+        const response: Response = await fetch(getRecipeInfoString);
 
-    return recipeListArr
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const jsonData: JSON | [] = await response.json();
+        return jsonData || [];  // return the json data or if there is no data, empty array
+    } 
+
+    catch (error) {
+        console.error(error.message);
+        return [];  // return empty array again if there is error
+    }
 }

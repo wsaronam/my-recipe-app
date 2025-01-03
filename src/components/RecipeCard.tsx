@@ -3,8 +3,9 @@ import { getRecipeData } from '../API.tsx';
 import { useFavorites } from "../context/favoritesContext.tsx"; 
 
 export function RecipeCard(props: any): React.JSX.Element {
-    const recipe = props.props
-    const recipeID = recipe.id
+    const recipe: any = props.props;
+    const recipeID: string = recipe.id;
+    console.log("This is the RecipeCard recipe:", recipe);
 
     const [fullRecipe, setFullRecipe] = useState<JSON | any>(null);
 
@@ -23,27 +24,27 @@ export function RecipeCard(props: any): React.JSX.Element {
     // I BELIEVE THE ISSUE LIES IN THE RECIPES BEING SAVED.  RECIPCARD IS SAVING A SIMPLER VERSION OF RECIPE WHILE RECIPEPAGE IS SAVING THE FULL.  
     // TODO:  MAKE THE FILES SAVE THE SAME RECIPE (EITHER SIMPLE OR FULL)
     
-    // Fetch data when component mounts or recipeId changes
-    useEffect(() => {
-        if (!recipeID) {
-            console.error("No recipeId provided");
-            return; // exit if there's no recipeId
-        }
+    // // Fetch data when component mounts or recipeId changes
+    // useEffect(() => {
+    //     if (!recipeID) {
+    //         console.error("No recipeId provided");
+    //         return; // exit if there's no recipeId
+    //     }
 
-        const fetchData = async () => {
-            try {
-                const data: JSON | never[] = await getRecipeData(recipeID);
-                setFullRecipe(data);  // store recipe data in state
-            } 
-            catch (error) {
-                console.error("Error fetching recipe data:", error);
-                setFullRecipe(null);  // no data if error
-            }
-        };
+    //     const fetchData = async () => {
+    //         try {
+    //             const data: JSON | never[] = await getRecipeData(recipeID);
+    //             setFullRecipe(data);  // store recipe data in state
+    //         } 
+    //         catch (error) {
+    //             console.error("Error fetching recipe data:", error);
+    //             setFullRecipe(null);  // no data if error
+    //         }
+    //     };
 
-        fetchData();
+    //     fetchData();
 
-    }, []);  // rerun only if recipeId changes
+    // }, []);  // rerun only if recipeId changes
 
 
 
@@ -51,7 +52,7 @@ export function RecipeCard(props: any): React.JSX.Element {
         <div className="card" style={{cursor: 'pointer'}}>
             <button
                 className="favorite-button"
-                onClick={() => toggleFavorite(fullRecipe)}
+                onClick={() => toggleFavorite(recipe)}
                 style={{
                     color: isFavorite(recipe) ? "gold" : "dimgray",
                     border: "solid",
@@ -66,7 +67,7 @@ export function RecipeCard(props: any): React.JSX.Element {
                 <img className="card-img" src={recipe.image} alt="" />
                 <h3>Ingredients:</h3>
                 <ul>
-                    {recipe.usedIngredients.map((ingredient) => (
+                    {recipe.extendedIngredients.map((ingredient) => (
                     <li key={ingredient.id}>
                         {ingredient.original}
                     </li>

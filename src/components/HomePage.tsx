@@ -11,30 +11,9 @@ export function HomePage(): React.JSX.Element {
 
     const { favorites } = useFavorites();
 
-    // temp for debugging favorites
-    // NEED TO FIGURE OUT A WAY OF GETTING THE CORRECT RECIPE INFORMATION AND BUILDING OBJECT TO PASS TO RECIPETABLE
+    // 
     useEffect(() => {
-        console.log("HomePage favorites:", favorites);
-        // // get arr of recipe IDs from the favorites
-        // const tempFavList: any[] = []
-        // for (var i = 0; i < favorites.length; i++) {
-        //     tempFavList.push(favorites[i].id);
-        // }
-        // console.log("recipeID list", tempFavList);
-
-        // // get and store the fav recipe data
-        // const tempFavRecipesList: JSON[] | any = [];
-        // try {
-        //     getRecipeDataList(tempFavList).then(data => {
-        //         setFavRecipes(data); // store the fav recipe data in favRecipes state
-        //     });
-        // }
-        // catch (error) {
-        //     console.error("Error fetching recipes from Spoonacular:", error);
-        //     setFavRecipes([]);
-        // }
-        // console.log("fav recipes list:", favRecipes)
-
+        setFavRecipes(favorites);
     }, [favorites]);
 
 
@@ -42,10 +21,28 @@ export function HomePage(): React.JSX.Element {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const userInput: string = inputRef.current.value; // get the user input
+        
+
+        // STEP 1: Get the basic data from Spoonacular API
+        let basicRecipeArr: any[] = [];
+        try {
+            await getAllRecipes(userInput).then(data => {
+                basicRecipeArr = data;  // data is an arr of basic recipe objects
+            });
+        }
+        catch (error) {
+            basicRecipeArr = [];
+        }
+        
+        // STEP 2: Use the basic data to obtain the Recipe IDs and get the full data
+        const recipeIDArr: any[] = []
+        for (var i = 0; i < basicRecipeArr.length; i++) {
+            recipeIDArr.push(basicRecipeArr[i].id);
+        }
 
         try {
-            getAllRecipes(userInput).then(data => {
-                setRecipes(data); // store the recipe data in recipes state
+            await getRecipeDataList(recipeIDArr).then(data => {
+                setRecipes(data);  // data is now an arr of full recipe objects
                 setIsSubmitted(true);
             });
         }
