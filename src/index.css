@@ -107,3 +107,12 @@ code {
   cursor: pointer;
   background: none;
 }
+
+#favorites-title {
+  text-align: left;
+  font-size: 32px;
+  padding-top: 25px;
+  padding-bottom: 0px;
+  margin-left: 25px;
+  padding-left: 25px;
+}

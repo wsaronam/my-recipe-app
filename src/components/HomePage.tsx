@@ -79,12 +79,18 @@ export function HomePage(): React.JSX.Element {
                 <RecipeTable props={recipes} />
             )}
 
-            {/*  I think the problem here is that we're passing an array of recipe ID (strings) to the RecipeTable when it actually takes in the
-                 recipes itself.  We need to fix this.
-            */}
-            {/* {favRecipes?.length > 0 && (
+            <hr
+                style={{
+                width: '100%',
+                height: '2px',
+                backgroundColor: 'black',
+                border: 'none',
+                }}
+            />
+            <h2 id="favorites-title">My Favorite Recipes</h2>
+            {favRecipes?.length > 0 && (
                 <RecipeTable props={favRecipes} />
-            )} */}
+            )}
         </div>
     );
 }
