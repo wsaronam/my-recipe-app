@@ -11,7 +11,7 @@ export function HomePage(): React.JSX.Element {
 
     const { favorites } = useFavorites();
 
-    // 
+    // update favorites when something is favorited/unfavorited
     useEffect(() => {
         setFavRecipes(favorites);
     }, [favorites]);

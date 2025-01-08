@@ -5,47 +5,13 @@ import { useFavorites } from "../context/favoritesContext.tsx";
 export function RecipeCard(props: any): React.JSX.Element {
     const recipe: any = props.props;
     const recipeID: string = recipe.id;
-    console.log("This is the RecipeCard recipe:", recipe);
 
-    const [fullRecipe, setFullRecipe] = useState<JSON | any>(null);
-
-    const { favorites, isFavorite, toggleFavorite } = useFavorites();
-
-    // temp for debugging favorites
-        useEffect(() => {
-            console.log("this component's favorites:", favorites);
-        }, [favorites]);
+    const { isFavorite, toggleFavorite } = useFavorites();
 
     const handleClick = () => {
         const url: string = `/recipe?recipeId=${recipeID}`;
         window.open(url, '_blank');
     };
-
-    // I BELIEVE THE ISSUE LIES IN THE RECIPES BEING SAVED.  RECIPCARD IS SAVING A SIMPLER VERSION OF RECIPE WHILE RECIPEPAGE IS SAVING THE FULL.  
-    // TODO:  MAKE THE FILES SAVE THE SAME RECIPE (EITHER SIMPLE OR FULL)
-    
-    // // Fetch data when component mounts or recipeId changes
-    // useEffect(() => {
-    //     if (!recipeID) {
-    //         console.error("No recipeId provided");
-    //         return; // exit if there's no recipeId
-    //     }
-
-    //     const fetchData = async () => {
-    //         try {
-    //             const data: JSON | never[] = await getRecipeData(recipeID);
-    //             setFullRecipe(data);  // store recipe data in state
-    //         } 
-    //         catch (error) {
-    //             console.error("Error fetching recipe data:", error);
-    //             setFullRecipe(null);  // no data if error
-    //         }
-    //     };
-
-    //     fetchData();
-
-    // }, []);  // rerun only if recipeId changes
-
 
 
     return (

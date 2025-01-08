@@ -94,21 +94,19 @@ export const useFavorites = () => {
 
 
 import React from "react";
-import { createContext, useContext, useState, useEffect, ReactNode, FC } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 
 const FavoritesContext = createContext<any | null>(null);
 
 export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ children }): JSX.Element => {
     const [favorites, setFavorites] = useState<any[]>(() => {  // load on startup initial
-        console.log("load favorites on startup")
         const storedFavorites = localStorage.getItem("favorites");
         return storedFavorites ? JSON.parse(storedFavorites): [];
     });
 
     // save favorites to localStorage when favorites changes
     useEffect(() => {
-        console.log('Updated favorites:', favorites);
         localStorage.setItem("favorites", JSON.stringify(favorites));
     }, [favorites]);
 
@@ -128,9 +126,7 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
 
     const toggleFavorite = (recipe: any) => {
-        console.log("toggle favorite: " + recipe)
         isFavorite(recipe) ? removeFavorite(recipe) : addFavorite(recipe);
-        console.log("new favorites after toggle: " + favorites);
     };
 
 

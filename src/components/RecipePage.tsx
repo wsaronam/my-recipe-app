@@ -9,7 +9,6 @@ export function RecipePage(): React.JSX.Element {
     // Extract the recipeId from the query string
     const queryParams: URLSearchParams = new URLSearchParams(location.search);  // Parse query parameters
     const recipeId: string | any = queryParams.get('recipeId');  // Get the recipeId parameter from the query string
-    console.log("this is the recipeID on the RecipePage:", recipeId);
 
     const [recipe, setRecipe] = useState<JSON | any>(null);
 
@@ -17,7 +16,6 @@ export function RecipePage(): React.JSX.Element {
 
     // temp for debugging favorites
         useEffect(() => {
-            console.log("RecipePage favorites:", favorites);
         }, [favorites]);
 
     // Fetch data when component mounts or recipeId changes
