@@ -10,6 +10,7 @@ export function HomePage(): React.JSX.Element {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     const { favorites } = useFavorites();
+    
 
     // update favorites when something is favorited/unfavorited
     useEffect(() => {
