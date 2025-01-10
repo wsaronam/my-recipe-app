@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { getRecipeData } from '../API.tsx';
+import React from "react";
 import { useFavorites } from "../context/favoritesContext.tsx"; 
 
 export function RecipeCard(props: any): React.JSX.Element {

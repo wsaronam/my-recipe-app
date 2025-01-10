@@ -134,7 +134,7 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const contextValue: any = useMemo(() => ({ favorites, addFavorite, removeFavorite, isFavorite, toggleFavorite }), [favorites]);
 
     return (
-        <FavoritesContext.Provider value={{ contextValue }}>
+        <FavoritesContext.Provider value={ contextValue }>
             {children}
         </FavoritesContext.Provider>
     );
@@ -149,8 +149,6 @@ export const useFavorites = () => {
         throw new Error("useFavorites has to be used in FavoritesProvider");
     }
 
-    else {
-        return context;
-    }
+    return context;
 }
     

@@ -18,6 +18,5 @@ export default function App(): React.JSX.Element {
                 </Routes>
             </BrowserRouter>
         </FavoritesProvider>
-        
     );
 }

@@ -15,8 +15,10 @@ export function RecipePage(): React.JSX.Element {
     const { favorites, isFavorite, toggleFavorite } = useFavorites();
 
     // temp for debugging favorites
-        useEffect(() => {
-        }, [favorites]);
+    useEffect(() => {
+
+    }, [favorites]);
+    
 
     // Fetch data when component mounts or recipeId changes
     useEffect(() => {
