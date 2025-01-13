@@ -94,7 +94,7 @@ export const useFavorites = () => {
 
 
 import React from "react";
-import { createContext, useContext, useState, useEffect, useMemo } from "react";
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from "react";
 
 
 const FavoritesContext = createContext<any | null>(null);
@@ -131,7 +131,7 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
 
 
-    const contextValue: any = useMemo(() => ({ favorites, addFavorite, removeFavorite, isFavorite, toggleFavorite }), [favorites]);
+    const contextValue: any = useMemo(() => ({ favorites, addFavorite, removeFavorite, isFavorite, toggleFavorite }), [favorites, addFavorite, removeFavorite, isFavorite, toggleFavorite]);
 
     return (
         <FavoritesContext.Provider value={ contextValue }>
