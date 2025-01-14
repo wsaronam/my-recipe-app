@@ -113,21 +113,31 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
 
     // functions for adding/removing/checking favorites ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    const addFavorite = (recipe: any) => {
+    const addFavorite = useCallback((recipe: any) => {
         setFavorites((prev) => [...prev, recipe]);
-    };
+        return favorites;
+    }, []);
 
-    const removeFavorite = (recipe: any) => {
+    const removeFavorite = useCallback((recipe: any) => {
         setFavorites((prev) => prev.filter((favRecipe) => favRecipe.id !== recipe.id));
-    };
+        return favorites;
+    }, []);
 
-    const isFavorite = (recipe: any) => {
-        return favorites.some((favRecipe) => favRecipe.id == recipe.id);
-    };
+    const isFavorite = useCallback((recipe: any) => {
+        return favorites.some((favRecipe) => favRecipe.id === recipe.id);
+    }, [favorites]);
 
-    const toggleFavorite = (recipe: any) => {
-        isFavorite(recipe) ? removeFavorite(recipe) : addFavorite(recipe);
-    };
+    const toggleFavorite = useCallback((recipe: any) => {
+        return isFavorite(recipe) ? removeFavorite(recipe) : addFavorite(recipe);
+        // setFavorites((prevFavorites) => {
+        //     if (isFavorite(recipe)) {
+        //         return removeFavorite(recipe);
+        //     } 
+        //     else {
+        //         return addFavorite(recipe);
+        //     }
+        //   });
+    }, [isFavorite, addFavorite, removeFavorite]);
 
 
 
