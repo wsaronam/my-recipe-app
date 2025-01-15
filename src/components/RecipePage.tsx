@@ -12,14 +12,9 @@ export function RecipePage(): React.JSX.Element {
 
     const [recipe, setRecipe] = useState<JSON | any>(null);
 
-    const { favorites, isFavorite, toggleFavorite } = useFavorites();
+    const { isFavorite, toggleFavorite } = useFavorites();
 
-    // temp for debugging favorites
-    useEffect(() => {
-
-    }, [favorites]);
     
-
     // Fetch data when component mounts or recipeId changes
     useEffect(() => {
         if (!recipeId) {
@@ -39,7 +34,6 @@ export function RecipePage(): React.JSX.Element {
         };
 
         fetchData();
-
     }, [recipeId]);  // rerun only if recipeId changes
 
     // Show loading state while recipe is null
