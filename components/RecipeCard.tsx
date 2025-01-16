@@ -8,7 +8,7 @@ export function RecipeCard(props: any): React.JSX.Element {
     const { isFavorite, toggleFavorite } = useFavorites();
 
     const handleClick = () => {
-        const url: string = `/recipe?recipeId=${recipeID}`;
+        const url: string = `/my-recipe-app/recipe?recipeId=${recipeID}`;
         window.open(url, '_blank');
     };
 
