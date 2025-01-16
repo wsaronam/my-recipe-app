@@ -11,7 +11,7 @@ export default function App(): React.JSX.Element {
 
     return (
         <FavoritesProvider>
-            <BrowserRouter>
+            <BrowserRouter basename="/my-recipe-app">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/recipe" element={<RecipePage />} />
