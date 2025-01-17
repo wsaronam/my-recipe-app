@@ -15,6 +15,9 @@ export default function App(): React.JSX.Element {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/recipe" element={<RecipePage />} />
+                    
+                    {/* catch-all route to HomePage */}
+                    <Route path="*" element={<HomePage />} />
                 </Routes>
             </BrowserRouter>
         </FavoritesProvider>
